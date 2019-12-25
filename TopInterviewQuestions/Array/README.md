@@ -185,3 +185,83 @@ class Solution:
         # Step 3: Reverse the rest of the elements
         reverse(nums, k, len(nums) - 1)
 ```
+
+## Contains Duplicate
+
+Given an array of integers, find if the array contains any duplicates.
+
+Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+
+### Example 1:
+
+```
+Input: [1,2,3,1]
+Output: true
+```
+
+### Example 2:
+
+```
+Input: [1,2,3,4]
+Output: false
+```
+
+### Example 3:
+
+```
+Input: [1,1,1,3,3,4,3,2,4,2]
+Output: true
+```
+
+### Solution:
+
+```python3
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        s = set()
+        
+        for num in nums:
+            if num in s:
+                return True
+            s.add(num)
+            
+        return False
+```
+
+## Single Number
+
+Given a **non-empty** array of integers, every element appears twice except for one. Find that single one.
+
+**Note:**
+
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+### Example 1:
+
+```
+Input: [2,2,1]
+Output: 1
+```
+
+### Example 2:
+
+```
+Input: [4,1,2,1,2]
+Output: 4
+```
+
+### Solution:
+
+```python3
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        s = set()
+
+        for num in nums:
+            if num in s:
+                s.remove(num)
+            else:
+                s.add(num)
+                
+        return s.pop()
+```
