@@ -81,8 +81,8 @@ class Solution:
             v = d[c]
             if i + 1 < len(s):
                 cc = s[i + 1]
-                if (c == 'I' and (cc == 'V' or cc == 'X')) or\
-                    (c == 'X' and (cc == 'L' or cc == 'C')) or\
+                if (c == 'I' and (cc == 'V' or cc == 'X')) or \
+                    (c == 'X' and (cc == 'L' or cc == 'C')) or \
                     (c == 'C' and (cc == 'D' or cc == 'M')):
                     v *= -1
             tot += v
