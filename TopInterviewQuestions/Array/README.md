@@ -322,4 +322,221 @@ class Solution:
         return ret
 ```
 
+## Plus One
 
+Given a **non-empty** array of digits representing a non-negative integer, plus one to the integer.
+
+The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+### Example 1:
+
+```
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+```
+
+### Example 2:
+
+```
+Input: [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+```
+
+### Solution:
+
+```python3
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        def plusOneHelper(ds: List[int], index: int) -> None:
+            if ds[index] == 9:
+                ds[index] = 0
+                if index == 0:
+                    ds.insert(0, 1)
+                else:
+                    plusOneHelper(ds, index - 1)
+            else:
+                ds[index] += 1
+        
+        l = digits.copy()
+        plusOneHelper(l, len(l) - 1)
+        
+        return l
+```
+
+## Move Zeroes
+
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+### Example:
+
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+```
+
+**Note:**
+
+1. You must do this in-place without making a copy of the array.
+2. Minimize the total number of operations.
+
+### Solution:
+
+```python3
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        
+        def find_zero_index(l: List[int], start: int) -> int:
+            i = start
+            while i < len(l):
+                if l[i] == 0:
+                    break
+                i += 1
+            return i
+
+        zero_index = find_zero_index(nums, 0)
+        if zero_index == len(nums):
+            # Reached the end
+            return
+        
+        for j in range(zero_index + 1, len(nums)):
+            if nums[j] != 0:
+                nums[zero_index], nums[j] = nums[j], 0
+                zero_index = find_zero_index(nums, zero_index + 1)
+```
+
+## Two Sum
+
+Given an array of integers, return **indices** of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have *exactly* one solution, and you may not use the same element twice.
+
+### Example:
+
+```
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+```
+
+### Solution:
+
+```python3
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        visited = {}
+        for i, num in enumerate(nums):
+            comp = target - num
+            if comp in visited:
+                return [visited[comp], i]
+            visited[num] = i
+        raise ValueError("No two sum solution")
+```
+
+## Valid Sudoku
+
+Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated **according to the following rules:**
+
+1. Each row must contain the digits `1-9` without repetition.
+2. Each column must contain the digits `1-9` without repetition.
+3. Each of the 9 `3x3` sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+![sudoku](./sudoku.png)
+
+A partially filled sudoku which is valid.
+
+The Sudoku board could be partially filled, where empty cells are filled with the character `'.'`.
+
+### Example 1:
+
+```
+Input:
+[
+  ["5","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: true
+```
+
+### Example 2:
+
+```
+Input:
+[
+  ["8","3",".",".","7",".",".",".","."],
+  ["6",".",".","1","9","5",".",".","."],
+  [".","9","8",".",".",".",".","6","."],
+  ["8",".",".",".","6",".",".",".","3"],
+  ["4",".",".","8",".","3",".",".","1"],
+  ["7",".",".",".","2",".",".",".","6"],
+  [".","6",".",".",".",".","2","8","."],
+  [".",".",".","4","1","9",".",".","5"],
+  [".",".",".",".","8",".",".","7","9"]
+]
+Output: false
+Explanation: Same as Example 1, except with the 5 in the top left corner being 
+    modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
+```
+
+**Note:**
+
+- A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+- Only the filled cells need to be validated according to the mentioned rules.
+- The given board contain only digits `1-9` and the character `'.'`.
+The given board size is always `9x9`.
+
+### Solution:
+
+```python3
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        row_dict = {}
+        col_dict = {}
+        blk_dict = {}
+        
+        # Each dict is made up of an index as the key and a set of visited numbers as the value
+        # For block dict, the block index is calculated as follows:
+        def getBlockIndex(row_index, col_index):
+            row = row_index // 3
+            col = col_index // 3
+            return row + 3 * col
+        
+        for row_index in range(len(board)):
+            for col_index in range(len(board[0])):
+                value = board[row_index][col_index]
+                if value != ".":
+                    if row_index not in row_dict:
+                        row_dict[row_index] = set()
+                    if value in row_dict[row_index]:
+                        return False
+                    row_dict[row_index].add(value)
+                    
+                    if col_index not in col_dict:
+                        col_dict[col_index] = set()
+                    if value in col_dict[col_index]:
+                        return False
+                    col_dict[col_index].add(value)
+                    
+                    blk_index = getBlockIndex(row_index, col_index)
+                    if blk_index not in blk_dict:
+                        blk_dict[blk_index] = set()
+                    if value in blk_dict[blk_index]:
+                        return False
+                    blk_dict[blk_index].add(value)
+                    
+        return True
+```
