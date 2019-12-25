@@ -113,9 +113,7 @@ class Solution:
             if prices[high] < prices[high - 1]:
                 if high - 1 - low > 0:
                     rs.append((low, high -1))
-                
                 low = high
-            
             high += 1
         
         # If the last range keeps ascending, put this range into the ranges
@@ -125,7 +123,7 @@ class Solution:
         tot = 0    
         
         for low, high in rs:
-            tot += (prices[high] - prices[low])
+            tot += prices[high] - prices[low]
             
         return tot
 ```
