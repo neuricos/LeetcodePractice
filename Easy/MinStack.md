@@ -1,6 +1,6 @@
 # Min Stack
 
-*Level: Easy*
+**Level:** Easy
 
 Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
@@ -9,9 +9,9 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 - top() -- Get the top element.
 - getMin() -- Retrieve the minimum element in the stack.
 
-## Example:
+## Example
 
-```
+```text
 MinStack minStack = new MinStack();
 minStack.push(-2);
 minStack.push(0);
@@ -22,7 +22,7 @@ minStack.top();      --> Returns 0.
 minStack.getMin();   --> Returns -2.
 ```
 
-## Solution:
+## Solution
 
 ```python3
 class MinStack:
@@ -54,7 +54,7 @@ class MinStack:
     def top(self) -> int:
         if self.min is None:
             raise ValueError("Top of empty stack")
-            
+
         return self.values[-1]
 
     def getMin(self) -> int:
@@ -71,6 +71,5 @@ class MinStack:
 
 **Note:**
 
-Runtime: 56 ms, faster than 95.30% of Python3 online submissions for Min Stack.
-
+Runtime: 56 ms, faster than 95.30% of Python3 online submissions for Min Stack.\
 Memory Usage: 16.2 MB, less than 100.00% of Python3 online submissions for Min Stack.

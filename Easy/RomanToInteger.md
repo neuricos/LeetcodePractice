@@ -1,10 +1,10 @@
 # Roman to Integer
 
-*Level: Easy*
+**Level:** Easy
 
 Roman numerals are represented by seven different symbols: `I`, `V`, `X`, `L`, `C`, `D` and `M`.
 
-```
+```text
 Symbol       Value
 I             1
 V             5
@@ -25,38 +25,38 @@ Roman numerals are usually written largest to smallest from left to right. Howev
 
 Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
 
-## Example 1:
+## Example 1
 
-```
+```text
 Input: "III"
 Output: 3
 ```
 
-## Example 2:
+## Example 2
 
-```
+```text
 Input: "IV"
 Output: 4
 ```
 
-## Example 3:
+## Example 3
 
-```
+```text
 Input: "IX"
 Output: 9
 ```
 
-## Example 4:
+## Example 4
 
-```
+```text
 Input: "LVIII"
 Output: 58
 Explanation: L = 50, V= 5, III = 3.
 ```
 
-## Example 5:
+## Example 5
 
-```
+```text
 Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
