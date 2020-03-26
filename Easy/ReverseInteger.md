@@ -49,3 +49,24 @@ class Solution:
 
         return value if (value >= -(1 << 31) and value <= (1 << 31)) else 0
 ```
+
+```java
+class Solution {
+    public int reverse(int x) {
+        int ret = 0;
+        do {
+            int digit = x % 10;
+            if (x < 0) {
+                if (ret < (Integer.MIN_VALUE - digit) / 10)
+                    return 0;
+            } else {
+                if (ret > (Integer.MAX_VALUE - digit) / 10)
+                    return 0;
+            }
+            ret = 10 * ret + digit;
+            x /= 10;
+        } while (x != 0);
+        return ret;
+    }
+}
+```
