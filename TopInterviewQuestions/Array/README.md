@@ -6,9 +6,9 @@ Given a sorted array nums, remove the duplicates in-place such that each element
 
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Given nums = [1,1,2],
 
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
@@ -16,9 +16,9 @@ Your function should return length = 2, with the first two elements of nums bein
 It doesn't matter what you leave beyond the returned length.
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Given nums = [0,0,1,1,1,2,2,3,3,4],
 
 Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
@@ -26,7 +26,7 @@ Your function should return length = 5, with the first five elements of nums bei
 It doesn't matter what values are set beyond the returned length.
 ```
 
-### Clarification:
+### Clarification
 
 Confused why the returned value is an integer but your answer is an array?
 
@@ -34,7 +34,7 @@ Note that the input array is passed in by **reference**, which means modificatio
 
 Internally you can think of this:
 
-```
+```text
 // nums is passed in by reference. (i.e., without making a copy)
 int len = removeDuplicates(nums);
 
@@ -45,20 +45,20 @@ for (int i = 0; i < len; i++) {
 }
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         if len(nums) == 0:
             return 0
-        
+
         i = 0
         for j in range(1, len(nums)):
             if nums[i] != nums[j]:
                 i += 1
                 nums[i] = nums[j]
-                
+
         return i + 1
 ```
 
@@ -70,18 +70,18 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 
 Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: [7,1,5,3,6,4]
 Output: 7
 Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
              Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: [1,2,3,4,5]
 Output: 4
 Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
@@ -89,22 +89,22 @@ Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-
              engaging multiple transactions at the same time. You must sell before buying again.
 ```
 
-### Example 3:
+### Example 3
 
-```
+```text
 Input: [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # Find all ascending ranges
         # Buy at the beginning of each range and sell at the end
-        
+
         rs = []
         low = 0
         high = 1
@@ -115,16 +115,16 @@ class Solution:
                     rs.append((low, high -1))
                 low = high
             high += 1
-        
+
         # If the last range keeps ascending, put this range into the ranges
         if high - 1 - low > 0:
             rs.append((low, high - 1))
-        
-        tot = 0    
-        
+
+        tot = 0
+
         for low, high in rs:
             tot += prices[high] - prices[low]
-            
+
         return tot
 ```
 
@@ -132,9 +132,9 @@ class Solution:
 
 Given an array, rotate the array to the right by k steps, where k is non-negative.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: [1,2,3,4,5,6,7] and k = 3
 Output: [5,6,7,1,2,3,4]
 Explanation:
@@ -143,9 +143,9 @@ rotate 2 steps to the right: [6,7,1,2,3,4,5]
 rotate 3 steps to the right: [5,6,7,1,2,3,4]
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: [-1,-100,3,99] and k = 2
 Output: [3,99,-1,-100]
 Explanation: 
@@ -158,7 +158,7 @@ rotate 2 steps to the right: [3,99,-1,-100]
 - Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
 - Could you do it in-place with O(1) extra space?
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -166,22 +166,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        
+
         k = k % len(nums)
-        
+
         def reverse(nums, si, ei):
             mi = (ei - si + 1) // 2 + si
             for i in range(si, mi):
                 j = si + ei - i
                 nums[i], nums[j] = nums[j], nums[i]
 
-        
         # Step 1: Reverse the entire list
         reverse(nums, 0, len(nums) - 1)
-        
+
         # Step 2: Reverse the first k elements
         reverse(nums, 0, k - 1)
-            
+
         # Step 3: Reverse the rest of the elements
         reverse(nums, k, len(nums) - 1)
 ```
@@ -192,39 +191,39 @@ Given an array of integers, find if the array contains any duplicates.
 
 Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: [1,2,3,1]
 Output: true
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: [1,2,3,4]
 Output: false
 ```
 
-### Example 3:
+### Example 3
 
-```
+```text
 Input: [1,1,1,3,3,4,3,2,4,2]
 Output: true
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         s = set()
-        
+
         for num in nums:
             if num in s:
                 return True
             s.add(num)
-            
+
         return False
 ```
 
@@ -236,21 +235,21 @@ Given a **non-empty** array of integers, every element appears twice except for 
 
 Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: [2,2,1]
 Output: 1
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: [4,1,2,1,2]
 Output: 4
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -262,7 +261,7 @@ class Solution:
                 s.remove(num)
             else:
                 s.add(num)
-                
+
         return s.pop()
 ```
 
@@ -270,16 +269,16 @@ class Solution:
 
 Given two arrays, write a function to compute their intersection.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: nums1 = [1,2,2,1], nums2 = [2,2]
 Output: [2,2]
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 Output: [4,9]
 ```
@@ -295,7 +294,7 @@ Output: [4,9]
 - What if nums1's size is small compared to nums2's size? Which algorithm is better?
 - What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -303,22 +302,22 @@ class Solution:
         d1 = {}
         d2 = {}
         ret = []
-        
+
         for num in nums1:
             if num not in d1:
                 d1[num] = 0
             d1[num] += 1
-            
+
         for num in nums2:
             if num not in d2:
                 d2[num] = 0
             d2[num] += 1
-            
+
         for k in d1:
             if k in d2:
                 times = min(d1[k], d2[k])
                 ret.extend([k for _ in range(times)])
-        
+
         return ret
 ```
 
@@ -330,23 +329,23 @@ The digits are stored such that the most significant digit is at the head of the
 
 You may assume the integer does not contain any leading zero, except the number 0 itself.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input: [1,2,3]
 Output: [1,2,4]
 Explanation: The array represents the integer 123.
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input: [4,3,2,1]
 Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -360,10 +359,10 @@ class Solution:
                     plusOneHelper(ds, index - 1)
             else:
                 ds[index] += 1
-        
+
         l = digits.copy()
         plusOneHelper(l, len(l) - 1)
-        
+
         return l
 ```
 
@@ -371,9 +370,9 @@ class Solution:
 
 Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
 
-### Example:
+### Example
 
-```
+```text
 Input: [0,1,0,3,12]
 Output: [1,3,12,0,0]
 ```
@@ -383,7 +382,7 @@ Output: [1,3,12,0,0]
 1. You must do this in-place without making a copy of the array.
 2. Minimize the total number of operations.
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -391,7 +390,7 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        
+
         def find_zero_index(l: List[int], start: int) -> int:
             i = start
             while i < len(l):
@@ -404,7 +403,7 @@ class Solution:
         if zero_index == len(nums):
             # Reached the end
             return
-        
+
         for j in range(zero_index + 1, len(nums)):
             if nums[j] != 0:
                 nums[zero_index], nums[j] = nums[j], 0
@@ -417,16 +416,16 @@ Given an array of integers, return **indices** of the two numbers such that they
 
 You may assume that each input would have *exactly* one solution, and you may not use the same element twice.
 
-### Example:
+### Example
 
-```
+```text
 Given nums = [2, 7, 11, 15], target = 9,
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -454,9 +453,9 @@ A partially filled sudoku which is valid.
 
 The Sudoku board could be partially filled, where empty cells are filled with the character `'.'`.
 
-### Example 1:
+### Example 1
 
-```
+```text
 Input:
 [
   ["5","3",".",".","7",".",".",".","."],
@@ -472,9 +471,9 @@ Input:
 Output: true
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Input:
 [
   ["8","3",".",".","7",".",".",".","."],
@@ -499,7 +498,7 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being
 - The given board contain only digits `1-9` and the character `'.'`.
 The given board size is always `9x9`.
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -507,14 +506,14 @@ class Solution:
         row_dict = {}
         col_dict = {}
         blk_dict = {}
-        
+
         # Each dict is made up of an index as the key and a set of visited numbers as the value
         # For block dict, the block index is calculated as follows:
         def getBlockIndex(row_index, col_index):
             row = row_index // 3
             col = col_index // 3
             return row + 3 * col
-        
+
         for row_index in range(len(board)):
             for col_index in range(len(board[0])):
                 value = board[row_index][col_index]
@@ -524,20 +523,20 @@ class Solution:
                     if value in row_dict[row_index]:
                         return False
                     row_dict[row_index].add(value)
-                    
+
                     if col_index not in col_dict:
                         col_dict[col_index] = set()
                     if value in col_dict[col_index]:
                         return False
                     col_dict[col_index].add(value)
-                    
+
                     blk_index = getBlockIndex(row_index, col_index)
                     if blk_index not in blk_dict:
                         blk_dict[blk_index] = set()
                     if value in blk_dict[blk_index]:
                         return False
                     blk_dict[blk_index].add(value)
-                    
+
         return True
 ```
 
@@ -551,10 +550,10 @@ Rotate the image by 90 degrees (clockwise).
 
 You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
 
-### Example 1:
+### Example 1
 
-```
-Given input matrix = 
+```text
+Given input matrix =
 [
   [1,2,3],
   [4,5,6],
@@ -569,9 +568,9 @@ rotate the input matrix in-place such that it becomes:
 ]
 ```
 
-### Example 2:
+### Example 2
 
-```
+```text
 Given input matrix =
 [
   [ 5, 1, 9,11],
@@ -589,7 +588,7 @@ rotate the input matrix in-place such that it becomes:
 ]
 ```
 
-### Solution:
+### Solution
 
 ```python3
 class Solution:
@@ -597,12 +596,12 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        
+
         # This solution has memory complexity = O(1)
-        
+
         matrix_len = len(matrix)
         s = matrix_len - 1
-        
+
         for i in range(matrix_len // 2):
             for j in range(i, s-i):
                 swap = matrix[i][j]
