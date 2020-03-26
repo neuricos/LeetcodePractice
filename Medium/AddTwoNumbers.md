@@ -70,6 +70,5 @@ class Solution {
 
 ## Score
 
-**Runtime:** 1 ms, faster than 100.00% of Java online submissions for Add Two Numbers.
-
+**Runtime:** 1 ms, faster than 100.00% of Java online submissions for Add Two Numbers.\
 **Memory Usage:** 45.3 MB, less than 76.90% of Java online submissions for Add Two Numbers.

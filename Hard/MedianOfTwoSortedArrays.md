@@ -77,5 +77,5 @@ class Solution:
 
 ## Score
 
-**Runtime:** 96 ms, faster than 65.96% of Python3 online submissions for Median of Two Sorted Arrays.
+**Runtime:** 96 ms, faster than 65.96% of Python3 online submissions for Median of Two Sorted Arrays.\
 **Memory Usage:** 13 MB, less than 100.00% of Python3 online submissions for Median of Two Sorted Arrays.
