@@ -37,3 +37,24 @@ class Solution:
             visited[num] = i
         raise ValueError("No two sum solution")
 ```
+
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] ret = new int[2];
+        Map<Integer,Integer> h = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int comp = target - nums[i];
+            if (h.containsKey(comp)) {
+                ret[0] = h.get(comp);
+                ret[1] = i;
+                if (ret[0] == ret[1])
+                    continue;
+                return ret;
+            }
+            h.put(nums[i], i);
+        }
+        return ret;
+    }
+}
+```

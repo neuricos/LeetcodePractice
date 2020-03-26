@@ -88,3 +88,38 @@ class Solution:
             tot += v
         return tot
 ```
+
+```java
+class Solution {
+    private static final Map<Character, Integer> sbDict;
+
+    static {
+        sbDict = new HashMap<>();
+        sbDict.put('I', 1);
+        sbDict.put('V', 5);
+        sbDict.put('X', 10);
+        sbDict.put('L', 50);
+        sbDict.put('C', 100);
+        sbDict.put('D', 500);
+        sbDict.put('M', 1000);
+    }
+
+    public int romanToInt(String s) {
+        int arr[] = new int[s.length()];
+        int i, tot = 0;
+
+        for (i = 0; i < arr.length; i++)
+            arr[i] = sbDict.get(s.charAt(i));
+
+        for (i = 0; i < arr.length - 1; i++)
+            if (arr[i] < arr[i+1])
+                arr[i] *= -1;
+
+        for (i = 0; i < arr.length; i++)
+            tot += arr[i];
+
+        return tot;
+    }
+}
+```
+
